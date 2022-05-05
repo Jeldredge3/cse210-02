@@ -27,8 +27,9 @@ python3 hilo
 ---
 The project files and folders are organized as follows:
 ```
-cse210-02                (project root folder)   
-+-- hilo.py              (source code for game)
+cse210-02                (project root folder)
++-- __main__.py          (runs the program by calling 'director.py')
++-- director.py          (contains a class and methods that define the program)
 +-- README.md            (general info)
 ```
 
