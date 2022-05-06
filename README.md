@@ -27,11 +27,12 @@ python3 hilo
 ---
 The project files and folders are organized as follows:
 ```
-cse210-02                (project root folder)
-+-- game                 (specific classes folder)
-    +-- director.py      (contains a class and methods that define the program)
-+-- __main__.py          (runs the program by calling 'director.py')
-+-- README.md            (general info)
+cse210-02                   (project root folder)
++-- game                    (specific classes folder)
+    +-- director.py         (contains a class and methods that define the program)
+    +-- playing_cards.py    (contains classes that create a deck of cards)
++-- __main__.py             (runs the program by calling 'director.py')
++-- README.md               (general info)
 ```
 
 ## Required Technologies
