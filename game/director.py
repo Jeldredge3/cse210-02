@@ -28,9 +28,6 @@ class Director:
             self (Director): an instance of Director.
         """
         print("--------------------")
-        # You may remove this, this is just for testing purposes.
-        self.method_testing_from_import()
-        print("--------------------")
 
         self.card = []
         self.is_playing = True
