@@ -1,7 +1,9 @@
-""" CSE210 W03 - High Low """
+""" CSE210 W03 - High/Low """
+
+from game.playing_cards import DeckofCards
 
 # TODO: 
-# 1) Create a deck of cards, 4 suits of 13 cards each. Might be best to create a seperate file and import later.
+# 1) [COMPLETE] Create a deck of cards, 4 suits of 13 cards each. Might be best to create a seperate file and import later.
 # 2) Draw the first card for the user to see, which will then ask if the following card is Higher/Lower.
 # 3) Make sure get_inputs(self) method works.
 # 4) Update the game's score if the user guesses Higher/Lower than the drawn card value.
@@ -25,10 +27,17 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        print("--------------------")
+        # You may remove this, this is just for testing purposes.
+        self.method_testing_from_import()
+        print("--------------------")
+
         self.card = []
         self.is_playing = True
         self.score = 0
         self.total_score = 0
+
+        self.start_game()
 
 
     def start_game(self):
@@ -41,7 +50,8 @@ class Director:
             self.get_inputs() # Get user input.
             self.do_updates() # Update the game based after checking user input.
             self.do_outputs() # Display user output.
-    
+        
+
     def get_inputs(self):
         """Ask the user if they guess that the next card will be higher or lower in value.
 
@@ -78,3 +88,14 @@ class Director:
         print(f"Next card was: {drawn_card}")
         print(f"Your score is: {self.total_score}\n")
         self.is_playing == (self.score > 0)
+
+    def method_testing_from_import(self):
+        # The deck list will fill with cards with the create_deck() method.
+        # Methods/functions will need to pass through the deck list as an attribute.
+        deck = []
+        # Access the DeckofCards() class and store the generated deck in an object. 
+        deck_obj = DeckofCards()
+        deck_obj.create_deck(deck)
+        deck_obj.view_top_card(deck)
+        deck_obj.shuffle_deck(deck)
+        deck_obj.view_deck(deck)
