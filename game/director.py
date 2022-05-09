@@ -3,11 +3,10 @@
 from game.playing_cards import DeckofCards
 
 # TODO: 
-# 1) [COMPLETE] Create a deck of cards, 4 suits of 13 cards each. Might be best to create a seperate file and import later.
-# 2) Draw the first card for the user to see, which will then ask if the following card is Higher/Lower.
-# 3) Make sure get_inputs(self) method works.
-# 4) Update the game's score if the user guesses Higher/Lower than the drawn card value.
-# 5) Display the score to the user after each round, ask if they want to keep playing, end the game if they decide to quit.
+# 1) Draw the first card for the user to see, which will then ask if the following card is Higher/Lower.
+# 2) Make sure get_inputs(self) method works.
+# 3) Update the game's score if the user guesses Higher/Lower than the drawn card value.
+# 4) Display the score to the user after each round, ask if they want to keep playing, end the game if they decide to quit.
 
 class Director:
     """ A person who directs the game. 
