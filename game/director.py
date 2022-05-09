@@ -107,21 +107,35 @@ class Director:
 
         Methods: 
             .create_deck()      Builds the Deck of cards using a list of objects.
-            .draw_card()        draws a card from the Deck.
             .shuffle_deck()     Re-orders the list of objects in the Deck.
             .count_deck()       Returns the amount of cards in the Deck.
-            .view_top_card()    Prints the card name in position [0] of the Deck list.
-            .view_deck()        Prints each card name within the Deck list.
-            .view_deck_list()   Prints each card along with it's attributes within the Deck list. 
+            .draw_card()        Draws a card from the Deck.
+            .discard_hand()     Discards all cards in your hand.
+            .merge_deck()       Combines all discarded cards back into the deck.
+            .view_top_card()    Prints the card name in position [0] of a list.
+            .view_list()        Prints each card name within a list.
+            .view_all_lists()   Prints each list. (Parameters: Deck, Hand, Discard)
         """
 
-        # The deck list will fill with cards with the create_deck() method.
-        # Methods/functions will need to pass through the deck list as an attribute.
+        # Create an empty list to pass through the 'DeckofCards' class. Store deck within an object, access card objects from the list.
         deck = []
-        # Access the DeckofCards() class and store the generated deck in an object. 
         deck_obj = DeckofCards()
         deck_obj.create_deck(deck)
+        # Create an empty list to store any drawn cards taken from the deck list.
+        hand = []
+        # Create an empty list to store any cards discarded from the hand list.
+        discard = []
+        # Access any attributes from a card or methods/functions from the deck below this line.
         deck_obj.view_top_card(deck)
-        deck_obj.shuffle_deck(deck)
+        deck_obj.view_list(hand)
+
+        deck_obj.draw_card(deck, hand)
         
+        deck_obj.view_top_card(deck)
+        deck_obj.view_list(hand)
+        deck_obj.view_list(discard)
+        print("--------------------------")
+        deck_obj.view_all_lists(deck, hand, discard)
+        print("--------------------------")
+        deck_obj.view_all_lists(deck, hand, discard)
 
