@@ -10,7 +10,7 @@ from game.playing_cards import DeckofCards
 # 5) Display the score to the user after each round, ask if they want to keep playing, end the game if they decide to quit.
 
 class Director:
-    """A person who directs the game. 
+    """ A person who directs the game. 
     
     The responsibility of a Director is to control the sequence of play.
 
@@ -22,7 +22,7 @@ class Director:
     """
 
     def __init__(self):
-        """Constructs a new Director.
+        """ Constructs a new Director.
         
         Args:
             self (Director): an instance of Director.
@@ -34,11 +34,11 @@ class Director:
         self.score = 0
         self.total_score = 0
 
-        self.start_game()
-
+        #self.start_game()
+        self.get_card_from_deck()
 
     def start_game(self):
-        """Starts the game by running the main game loop.
+        """ Starts the game by running the main game loop.
         
         Args:
             self (Director): an instance of Director.
@@ -50,7 +50,7 @@ class Director:
         
 
     def get_inputs(self):
-        """Ask the user if they guess that the next card will be higher or lower in value.
+        """ Ask the user if they guess that the next card will be higher or lower in value.
 
         Args:
             self (Director): An instance of Director.
@@ -59,7 +59,7 @@ class Director:
         self.is_playing = (higher_lower == "h" or higher_lower == "l") # If user types 'h' or 'l', they are considered actively playing.
 
     def do_updates(self):
-        """Updates the player's score.
+        """ Updates the player's score.
 
         Args:
             self (Director): An instance of Director.
@@ -71,7 +71,7 @@ class Director:
         # To be updated later, will need to update the player score if they are still playing.
 
     def do_outputs(self):
-        """Displays the card that was drawn as well as the score. Also asks the player if they want to keep playing. 
+        """ Displays the card that was drawn as well as the score. Also asks the player if they want to keep playing. 
 
         Args:
             self (Director): An instance of Director.
@@ -86,7 +86,35 @@ class Director:
         print(f"Your score is: {self.total_score}\n")
         self.is_playing == (self.score > 0)
 
-    def method_testing_from_import(self):
+    def get_card_from_deck(self):
+        """ Create a deck of 52 cards using the 'DeckofCards' class in 'playing_cards.py'.
+        The deck is generated using the '.create_deck' method and is stored within a list.
+        An individual card can be accessed from the list by calling its index. (ex. 'deck[0]')
+        The unique card object will not be readable unless one of its attributes are called.
+        See below for a list of attributes.
+
+        Attributes: 
+            .suit               "Clubs, Diamonds, Hearts, Spades" 
+            .rank               "Ace, Jack, Queen, King, etc."
+            .value              the card's value in integer form (1-13)
+            .name               the full name of a card (ex. "Ace of Spades")
+            .shortcut           the abbreviated name of a card (ex. "S1")
+
+        - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        The deck of cards can also be accessed and modified using the below methods.
+        The deck will need to be passed through these methods as a parameter.
+
+        Methods: 
+            .create_deck()      Builds the Deck of cards using a list of objects.
+            .draw_card()        draws a card from the Deck.
+            .shuffle_deck()     Re-orders the list of objects in the Deck.
+            .count_deck()       Returns the amount of cards in the Deck.
+            .view_top_card()    Prints the card name in position [0] of the Deck list.
+            .view_deck()        Prints each card name within the Deck list.
+            .view_deck_list()   Prints each card along with it's attributes within the Deck list. 
+        """
+
         # The deck list will fill with cards with the create_deck() method.
         # Methods/functions will need to pass through the deck list as an attribute.
         deck = []
@@ -95,4 +123,5 @@ class Director:
         deck_obj.create_deck(deck)
         deck_obj.view_top_card(deck)
         deck_obj.shuffle_deck(deck)
-        deck_obj.view_deck(deck)
+        
+
