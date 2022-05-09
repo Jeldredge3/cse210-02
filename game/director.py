@@ -115,13 +115,18 @@ class Director:
             .view_deck_list()   Prints each card along with it's attributes within the Deck list. 
         """
 
-        # The deck list will fill with cards with the create_deck() method.
-        # Methods/functions will need to pass through the deck list as an attribute.
+        # Create an empty list to pass through the 'DeckofCards' class. Store deck within an object, access card objects from the list.
         deck = []
-        # Access the DeckofCards() class and store the generated deck in an object. 
         deck_obj = DeckofCards()
         deck_obj.create_deck(deck)
+        # Create an empty list to store any drawn cards taken from the deck list.
+        hand = []
+        # Create an empty list to store any cards discarded from the hand list.
+        discard_pile = []
+        # Access any attributes from a card or methods/functions from the deck below this line.
         deck_obj.view_top_card(deck)
-        deck_obj.shuffle_deck(deck)
+        deck_obj.draw_card(deck, hand)
+        deck_obj.view_top_card(deck)
+        
         
 

@@ -7,7 +7,9 @@ class DeckofCards:
 
     Attributes: 
         create_deck | Builds the Deck of cards using a list of objects.
-        draw_card | draws a card from the Deck.
+        draw_card | draws a card from the Deck, places card in Hand.
+        discard_hand | Discards all cards from hand.
+        merge_deck | Combines discarded cards back into the Deck.
         shuffle_deck | Re-orders the list of objects in the Deck.
         count_deck | Returns the amount of cards in the Deck.
         view_top_card | Prints the card name in position [0] of the Deck list.
@@ -52,9 +54,33 @@ class DeckofCards:
                 # Append the unique card object to the Deck list.
                 deck.append(card_obj)
         
-    def draw_card(self, deck):
-        pass
-    
+    def draw_card(self, deck, hand):
+        # Draw a card from the deck list, move the drawn card to the hand list.
+        if len(deck) > 0:
+            top_card = deck.pop(0)
+            print(f"Card drawn is: {top_card.name}.")
+            hand.append(top_card)
+        else:
+            print("No cards left in the deck to draw from.")
+
+    def discard_hand(self, hand, discard):
+        # Discard a card from your hand list, move the card to the discard list.
+        if len(hand) > 0:
+            for card in hand:
+                discarded_card = hand.pop(card)
+                discard.append(discarded_card)
+        else:
+            print("No cards in the hand to discard.")
+
+    def merge_deck(self, deck, discard):
+        # Combine cards in the discard list back into the deck list.
+        if len(discard) > 0:
+            for card in discard:
+                returned_card = discard.pop(card)
+                deck.append(returned_card)
+        else:
+            print("No cards in the discard pile to merge into the deck.")
+
     def shuffle_deck(self, deck):
         # Re-orders the list of objects.
         random.shuffle(deck)
@@ -62,12 +88,12 @@ class DeckofCards:
     def count_deck(self, deck):
         # Count the number of cards in the deck.
         total_cards = len(deck)
-        print(f"There are {total_cards} in the Deck.")
+        print(f"There are {total_cards} in the deck.")
     
     def view_top_card(self, deck):
         # Print the card in position [0] of the Deck list.
-        first_card = deck[0].name
-        print(f"First Card: {first_card}")
+        top_card = deck[0].name
+        print(f"Top card in deck: {top_card}")
 
     def view_deck(self, deck):
         # Print the name of each card in the Deck along with their position.
