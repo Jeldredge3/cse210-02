@@ -9,11 +9,9 @@ class DeckofCards:
         create_deck | Builds the Deck of cards using a list of objects.
         shuffle_deck | Re-orders the list of objects in the Deck.
         count_deck | Returns the amount of cards in the Deck.
-
         draw_card | draws a card from the Deck, places card in Hand.
         discard_hand | Discards all cards from hand.
-        merge_deck | Combines discarded cards back into the Deck.
-        
+        merge_discarded | Combines discarded cards back into the Deck.
         view_top_card | Prints the card name in position [0] of a list.
         view_list | Prints all card names in a list.
         view_all_lists | Prints the Deck, Hand, and Discard lists.
@@ -121,25 +119,33 @@ class DeckofCards:
                 
     # =========================================================================
 
-    def draw_card(self, deck, hand):
+    def draw_card(self, deck, hand): # DECK -> HAND
         # Draw a card from the deck list, move the drawn card to the hand list.
         if len(deck) > 0:
             top_card = deck.pop(0)
-            print(f"Card drawn is: {top_card.name}.")
+            print(f"Card: {top_card.name}.")
             hand.append(top_card)
         else:
             print("No cards left in the deck to draw from.")
 
-    def discard_hand(self, hand, discard):
-        # Discard a card from your hand list, move the card to the discard list.
+    def discard_hand(self, hand, discard): # HAND -> DISCARD
+        # Discard all cards from your hand list, move the cards into the discard list.
         if len(hand) > 0:
             for card in hand:
-                discarded_card = hand.pop(card)
+                discarded_card = hand.pop(0)
                 discard.append(discarded_card)
         else:
             print("No cards in the hand to discard.")
+    
+    def discard_card(self, hand, discard): # HAND -> DISCARD
+        # Discard the first card from your hand list, move the card into the discard list.
+        if len(hand) > 0:
+            discarded_card = hand.pop(0)
+            discard.append(discarded_card)
+        else:
+            print("No cards in the hand to discard.")
 
-    def merge_deck(self, deck, discard):
+    def merge_discarded(self, discard, deck): # DISCARD -> DECK
         # Combine cards in the discard list back into the deck list.
         if len(discard) > 0:
             for card in discard:
