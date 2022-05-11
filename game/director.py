@@ -89,6 +89,7 @@ class Director: # This runs '__init__(self)' the moment it is called.
 
         while self.is_playing:
             # Run the '.everything()' method at the bottom of the file's code.
+            # Will loop until 'self.is_playing' == False.
             self.everything()
 
     # =============================================================================== #

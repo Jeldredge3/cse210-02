@@ -123,7 +123,7 @@ class DeckofCards:
         # Draw a card from the deck list, move the drawn card to the hand list.
         if len(deck) > 0:
             top_card = deck.pop(0)
-            print(f"You draw a '{top_card.name}' ({top_card.value}).")
+            # TEST: print(f"You draw a '{top_card.name}' ({top_card.value}).")
             hand.append(top_card)
         else:
             print("No cards left in the deck to draw from.")
