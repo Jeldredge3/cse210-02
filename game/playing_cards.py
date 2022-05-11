@@ -176,6 +176,9 @@ class CardObject():
         # Call this method to print out the object's attributes.
         print(f"'{self.shortcut}', {self.rank}, {self.suit}, {self.value}, '{self.name}'")
 
+    
+    
+
 # Called with: deck_obj = DeckofCards()
 
 
