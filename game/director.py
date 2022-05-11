@@ -80,9 +80,10 @@ class Director:
             self (Director): an instance of Director.
         """
         while self.is_playing:
-            self.get_inputs() # Get user input.
-            self.do_updates() # Update the game after checking user input.
-            self.do_outputs() # Display user output.
+            self.everything()
+            # self.get_inputs() # Get user input.
+            # self.do_updates() # Update the game after checking user input.
+            # self.do_outputs() # Display user output.
 
     def get_inputs(self):
         """ Draw a card from the Deck.
@@ -112,6 +113,10 @@ class Director:
 
         # TEST: self.hilo.view_all_lists(self.deck, self.hand, self.discard)
         drawn_card = self.hand[0].value
+        self.hilo.discard_card(self.hand, self.discard)
+        last_card = self.discard[0].value
+        print(drawn_card)
+        print(last_card)
 
     def do_outputs(self):
         """ Displays Score.
@@ -128,3 +133,22 @@ class Director:
         print(f"Next card was: {drawn_card}")
         print(f"Your score is: {self.total_score}\n")
         self.is_playing == (self.score > 0)
+
+    def everything(self):
+        self.hilo.draw_card(self.deck, self.hand)
+        last_card = self.hand[0].shortcut
+        higher_lower = input("Higher or Lower? [h/l] ")
+        self.is_playing = (higher_lower == "h" or higher_lower == "l")
+        self.hilo.discard_card(self.hand, self.discard)
+       
+        self.hilo.draw_card(self.deck, self.hand)
+        # self.hilo.view_all_lists(self.deck, self.hand, self.discard)
+        next_card = self.hand[0].shortcut   
+        
+        print(f"last card {last_card}")
+        print(f"next card {next_card}")
+        # 
+        self.hilo.discard_card(self.hand, self.discard)
+        
+        # print(f"first card {drawn_card}")
+        # print(f"last card {last_card}")
