@@ -65,7 +65,7 @@ class DeckofCards:
         else:
             print(f"There are {total_cards} cards in the deck.")
     
-    # =========================================================================
+    # ========================================================================= #
 
     def view_top_card(self, object_list):
         # Print the card in position [0] of the list.
@@ -117,13 +117,13 @@ class DeckofCards:
         print(f"Hand - {hand_counter} items: \n: {hand_display}\n") 
         print(f"Discard - {discard_counter} items: \n: {discard_display}\n") 
                 
-    # =========================================================================
+    # ========================================================================= #
 
     def draw_card(self, deck, hand): # DECK -> HAND
         # Draw a card from the deck list, move the drawn card to the hand list.
         if len(deck) > 0:
             top_card = deck.pop(0)
-            print(f"Card: {top_card.name}.")
+            print(f"You draw a '{top_card.name}' ({top_card.value}).")
             hand.append(top_card)
         else:
             print("No cards left in the deck to draw from.")

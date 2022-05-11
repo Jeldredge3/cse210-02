@@ -7,7 +7,7 @@ from game.playing_cards import DeckofCards
 # 2) Make score update if player guesses correctly or incorrectly.
 # 3) Any other fun additions to the game.
 
-class Director:
+class Director: # This runs '__init__(self)' the moment it is called.
     """ The person who directs the game. Controls the sequence of play.
 
     Attributes:
@@ -51,20 +51,20 @@ class Director:
         self.score = 0
         self.total_score = 0
 
-        # Create the deck and set up the game.
+        # Create empty lists to be populated later.
         self.deck = [] # Holds a list of individual card objects.
         self.hand = [] # Temporarily holds any cards that are drawn from the deck list.
         self.discard = [] # Will contain any cards that are discarded from the hand list.
 
         # Store deck data in an object called 'hilo' created from the class 'DeckofCards'.
         self.hilo = DeckofCards()
+        # Pass through 'self.deck' into the '.create_deck()' method which will fill the empty list with 52 card objects.
         self.hilo.create_deck(self.deck)
+        # Shuffle the deck list.
+        self.hilo.shuffle_deck(self.deck)
 
-        # Start the game.
-        self.game_setup()
-        self.start_game()
+        # =========================================================================== #
 
-    def game_setup(self):
         # Print the game name and initial message.
         print("-----------------------")
         print("       HiLo Game       ")
@@ -73,83 +73,95 @@ class Director:
         print("Try to guess if the next card will be of higher or lower value than the previous.")
         print("-----------------------\n")
 
+        # Start the game. Runs the method/function below.
+        self.start_game()
+
     def start_game(self):
         """ Starts the game by running the main game loop.
         
         Args:
             self (Director): an instance of Director.
         """
-        while self.is_playing:
-            self.everything()
-            # self.get_inputs() # Get user input.
-            # self.do_updates() # Update the game after checking user input.
-            # self.do_outputs() # Display user output.
-
-    def get_inputs(self):
-        """ Draw a card from the Deck.
-            Ask the user if they guess that the next card will be higher or lower in value.
-
-        Args:
-            self (Director): An instance of Director.
-        """
-        #self.hilo.view_all_lists(self.deck, self.hand, self.discard)
-        # Draw a card. Store the card's attributes in variables.
+        # Draw a card from the deck list to the hand list.
         self.hilo.draw_card(self.deck, self.hand)
-        card_value = self.hand[0].value
-        # Ask user if the next card will be in higher value.
-        higher_lower = input("Higher or Lower? [h/l] ")
-        self.is_playing = (higher_lower == "h" or higher_lower == "l") # If user types 'h' or 'l', they are considered actively playing.
-
-    def do_updates(self):
-        """ Updates the player's score.
-
-        Args:
-            self (Director): An instance of Director.
-        """
-        if not self.is_playing:
-            return 
-
-        # TODO: Compare the user input with the card's value.
-
-        # TEST: self.hilo.view_all_lists(self.deck, self.hand, self.discard)
-        drawn_card = self.hand[0].value
+        # Discard the card from the hand list to the discard list.
         self.hilo.discard_card(self.hand, self.discard)
-        last_card = self.discard[0].value
-        print(drawn_card)
-        print(last_card)
 
-    def do_outputs(self):
-        """ Displays Score.
+        while self.is_playing:
+            # Run the '.everything()' method at the bottom of the file's code.
+            self.everything()
 
-        Args:
-            self (Director): An instance of Director.
-        """
-        if not self.is_playing:
-            return
-        
-        drawn_card = ""
-        # TODO: Update the user score.
-
-        print(f"Next card was: {drawn_card}")
-        print(f"Your score is: {self.total_score}\n")
-        self.is_playing == (self.score > 0)
+    # =============================================================================== #
 
     def everything(self):
-        self.hilo.draw_card(self.deck, self.hand)
-        last_card = self.hand[0].shortcut
-        higher_lower = input("Higher or Lower? [h/l] ")
-        self.is_playing = (higher_lower == "h" or higher_lower == "l")
-        self.hilo.discard_card(self.hand, self.discard)
-       
-        self.hilo.draw_card(self.deck, self.hand)
-        # self.hilo.view_all_lists(self.deck, self.hand, self.discard)
-        next_card = self.hand[0].shortcut   
-        
-        print(f"last card {last_card}")
-        print(f"next card {next_card}")
-        # 
-        self.hilo.discard_card(self.hand, self.discard)
-        
-        # print(f"first card {drawn_card}")
-        # print(f"last card {last_card}")
-        # hello
+        """ Steps:
+                (1) Define the last drawn card.
+                (2) Ask user if the next card will be higher/lower.
+                (3) Define the next drawn card.
+                (4) Compare the last card with the next card.
+                (5) Check if user guessed correctly, update the score.
+                (6) Display the current score each round.
+                (7) End the game if player falls below '0' points.
+        """
+        if self.is_playing == True:
+
+            # ================= (1) ================= #
+
+            # Create a variable called 'last_card' which will be the card in position [0] of the discard list.
+            last_card = self.discard[0].value
+
+            # ================= (2) ================= #
+
+            # Ask the user whether they think the next card is higher or lower in value.
+            user_input = input("Higher or Lower? [h/l] ")
+            input_lowercase = user_input.lower()
+            user_guess = "" # Empty variable to define later.
+
+            # If user guesses 'h' or 'higher'...
+            if input_lowercase == "h" or input_lowercase == "higher":
+                print("You guess higher.")
+
+            # If user guesses 'l' or 'lower'... 
+            elif input_lowercase == "l" or input_lowercase == "lower":
+                print("You guess lower.")
+
+            # EXTRA: If guesses 's' or 'same'...
+            elif input_lowercase == "s" or input_lowercase == "same":
+                pass
+
+            # TESTING: If user types '?' or 'test'...
+            elif input_lowercase == "?" or input_lowercase == "test":
+                print("--------------------")
+                self.hilo.view_all_lists(self.deck, self.hand, self.discard)
+                print("--------------------\n")
+
+            # QUIT: If user types 'q' or 'quit'...
+            elif input_lowercase == "q" or input_lowercase == "quit":
+                print("Exiting...")
+                self.is_playing = False
+
+            # If user types anything else...
+            else:
+                print(f"'{user_input}' is not a valid option. Type 'h' for higher or 'l' for lower.")
+                print("Type 'q' to quit the program.\n")
+                pass
+
+            # ================= (3) ================= #
+
+            # Draw the next card from the deck to the hand list.
+            self.hilo.draw_card(self.deck, self.hand)
+            # Create a variable called 'next_card' which will be the card that was just drawn.
+            next_card = self.hand[0].value
+            next_card_name = self.hand[0].shortcut 
+
+            # ================= (4) ================= #
+            # TODO: Compare 'last_card' with 'next_card'
+
+            # ================= (5) ================= #
+            # TODO: Check if user guessed correctly. Update the player's score.
+
+            # ================= (6) ================= #
+            # TODO: Display the current score after each round.
+
+            # ================= (7) ================= #
+            # TODO: End the game if player falls below '0' points.
