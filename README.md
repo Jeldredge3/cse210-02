@@ -43,6 +43,7 @@ cse210-02                   (project root folder)
 ---
 * Herrera Axel
 * Igor de Paula
-* Jordan Eldredge - Says Hi.
+* Jordan Eldredge
 * Jonathan Troche
 
+# Hello World.

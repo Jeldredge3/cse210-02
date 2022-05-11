@@ -19,7 +19,7 @@ class Director:
     def __init__(self):
         """ Create a deck of 52 cards using the 'DeckofCards' class in 'playing_cards.py'.
         The deck is generated using the '.create_deck' method and is stored within a list.
-        An individual card can be accessed from the list by calling its index. (ex. 'deck[0]')
+        An individual card can be accessed from the list by calling its index. (ex. 'self.deck[0]')
         The unique card object will not be readable unless one of its attributes are called.
         See below for a list of attributes.
 
@@ -91,9 +91,9 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        #self.hilo.view_all_lists(self.deck, self.hand, self.discard)
         # Draw a card. Store the card's attributes in variables.
         self.hilo.draw_card(self.deck, self.hand)
-        card_name = self.hand[0].name
         card_value = self.hand[0].value
         # Ask user if the next card will be in higher value.
         higher_lower = input("Higher or Lower? [h/l] ")
@@ -110,9 +110,8 @@ class Director:
 
         # TODO: Compare the user input with the card's value.
 
-        # Discard the drawn card so it is not placed back in the Deck.
-        self.hilo.discard_card(self.hand, self.discard)
         # TEST: self.hilo.view_all_lists(self.deck, self.hand, self.discard)
+        drawn_card = self.hand[0].value
 
     def do_outputs(self):
         """ Displays Score.

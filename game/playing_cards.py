@@ -133,7 +133,7 @@ class DeckofCards:
         if len(hand) > 0:
             for card in hand:
                 discarded_card = hand.pop(0)
-                discard.append(discarded_card)
+                discard.insert(0, discarded_card)
         else:
             print("No cards in the hand to discard.")
     
@@ -141,7 +141,7 @@ class DeckofCards:
         # Discard the first card from your hand list, move the card into the discard list.
         if len(hand) > 0:
             discarded_card = hand.pop(0)
-            discard.append(discarded_card)
+            discard.insert(0, discarded_card)
         else:
             print("No cards in the hand to discard.")
 
