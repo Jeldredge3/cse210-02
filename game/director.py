@@ -1,6 +1,7 @@
 """ CSE210 W03 - High/Low """
 
 from game.playing_cards import DeckofCards
+from game.hilo_game import GameRules
 
 # TODO: 
 # 1) Compare card value with user input
