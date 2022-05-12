@@ -154,7 +154,6 @@ class Director: # This runs '__init__(self)' the moment it is called.
             print(f"{new_card}")
 
             # (e) Update the player's score depending on the user's guess.
-            print(f"n.{new_card_value} vs o.{old_card_value}\n")
             if new_card_value > old_card_value and guess_number > old_card_value:
                 print("You guessed right!")
                 self.score += 100
@@ -178,7 +177,6 @@ class Director: # This runs '__init__(self)' the moment it is called.
         
         # (4) When loop_game = False:
         self.hilo.print_game_over(self.turn, self.score)
-        self.is_playing = False
             
         # (5) Ask the user if they want to continue playing.
         keep_playing = input("Keep playing? [y/n] ")
