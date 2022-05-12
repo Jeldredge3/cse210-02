@@ -171,7 +171,7 @@ class Director: # This runs '__init__(self)' the moment it is called.
             print(f"Turn: {self.turn}    Score: {self.score}")
             print("- - - - - - - - - - - -\n")
         
-        # (4) When loop_game = False
+        # (4) When loop_game = False:
         self.hilo.print_game_over(self.turn, self.score)
 
         # (5) Ask the user if they want to continue playing.
