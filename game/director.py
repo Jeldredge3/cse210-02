@@ -95,9 +95,8 @@ class Director: # This runs '__init__(self)' the moment it is called.
                     (b) Ask user if the next card will be higher/lower.
                     (c) Check if the deck is empty. If deck is empty: refill it from the discard pile.
                     (d) Draw the next card.
-                    (e) Compare the last card with the next card.
-                    (f) Update the user's score based on their guess.
-                    (g) Begin the next round, repeat the loop.
+                    (e) Compare the last card with the next card. Update the user's score based on their guess.
+                    (f) Begin the next round, repeat the loop.
                 (4) Display the final score.
 
             Objects:
@@ -106,48 +105,78 @@ class Director: # This runs '__init__(self)' the moment it is called.
         """
         
 
-        # Start the first round.
-        turn = 1
+        # (1) Start the first round.
+        self.turn = 1
         loop_game = True
         self.score = 300
         print("-----------------------")
-        print(f"Turn: {turn}    Score: {self.score}")
+        print(f"Turn: {self.turn}    Score: {self.score}")
         print("- - - - - - - - - - - -\n")
 
-        # Draw the first card from the deck. If no cards, exit game.
+        # (2) Draw the first card from the deck. If no cards, exit game.
         self.cards.draw_card(self.deck, self.hand)
-        first_card = self.hand[0].value_and_suit
-        previous_card = first_card
+        old_card = self.hand[0].value_and_suit
+        old_card_value = self.hand[0].value
 
-        # Discard the first card.
+        # (3) Discard the first card.
         self.cards.discard_card(self.hand, self.discard)
 
         while loop_game == True:
-            # Print the last card that was discarded. Ask user if the next card will be higher or lower in value.
-            print(previous_card)
-            self.hilo.ask_higher_or_lower()
+            # (a) If the user has below 0 points, end the game.
+            if self.score <= 0: 
+                loop_game = False
+                break
 
-            # Check if deck is empty. If near empty, repopulate the deck. Shuffle deck.
+            # (b) Print the last card that was discarded. Ask user if the next card will be higher or lower in value.
+            print(old_card)
+            self.hilo.ask_higher_or_lower()
+            # Get the returned value in 'self.hilo.guess' ("higher", "lower").
+            guess = self.hilo.guess
+            # Create a variable to hold a integer value that is higher or lower than the last card.
+            if guess == "higher":
+                guess_number = old_card_value + 1
+            elif guess == "lower":
+                guess_number = old_card_value - 1 
+            else:
+                loop_game = False
+                break
+
+            # (c) Check if deck is empty. If near empty, repopulate the deck. Shuffle deck.
             if len(self.deck) == 0:
                 self.cards.merge_discarded(self.discard, self.deck)
                 self.cards.shuffle_deck(self.deck)
 
-            # Draw the next card from the deck.
+            # (d) Draw the next card from the deck.
             self.cards.draw_card(self.deck, self.hand)
-            next_card = self.hand[0].value_and_suit
-            print(f"{next_card}")
+            new_card = self.hand[0].value_and_suit
+            new_card_value = self.hand[0].value
+            print(f"{new_card}")
 
-            # Discard the most recent card, redefine it as the 'previous_card'.
+            # (e) Update the player's score depending on the user's guess.
+            print(f"n.{new_card_value} vs o.{old_card_value}\n")
+            if new_card_value > old_card_value and guess_number > old_card_value:
+                print("You guessed right!")
+                self.score += 100
+            elif new_card_value < old_card_value and guess_number < old_card_value:
+                print("You guessed right!")
+                self.score += 100
+            else:
+                print("Your guess was wrong.")
+                self.score -= 75
+
+            # Discard the most recent card, redefine it as the 'old_card'.
             self.cards.discard_card(self.hand, self.discard)
-            previous_card = self.discard[0].value_and_suit
+            old_card = self.discard[0].value_and_suit
+            old_card_value = self.discard[0].value
 
-            # TODO: Update the player's score depending on their 'self.guess'.
-            print("Results Go Here.\n")
-
-            # Begin the next round.
-            turn += 1
+            # (f) Begin the next round.
+            self.turn += 1
             print("-----------------------")
-            print(f"Turn: {turn}    Score: {self.score}")
+            print(f"Turn: {self.turn}    Score: {self.score}")
             print("- - - - - - - - - - - -\n")
+        
+        # When loop_game = False:
+        self.hilo.print_game_over(self.turn, self.score)
+        self.is_playing = False
             
             
