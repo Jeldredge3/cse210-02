@@ -177,7 +177,6 @@ class Director: # This runs '__init__(self)' the moment it is called.
         
         # (4) When loop_game = False:
         self.hilo.print_game_over(self.turn, self.score)
-        self.is_playing = False
             
         # (5) Ask the user if they want to continue playing.
         keep_playing = input("Keep playing? [y/n] ")

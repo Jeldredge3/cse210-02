@@ -49,7 +49,6 @@ class GameRules:
             self.guess = "higher"
         else:
             self.guess = None
-        print()
     
     def add_score(self, score):
         score += 100
