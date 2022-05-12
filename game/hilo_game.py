@@ -11,7 +11,6 @@ class GameRules:
     Methods/Functions:
         print_game_intro    | Prints the first message that tells the user the rules of the game.
         print_game_over     | Prints the last message with the score and amount of turns taken. 
-        print_score         | Prints the score.
         ask_higher_or_lower | Asks the user for a string input "higher" or "lower".
     """
 
@@ -35,7 +34,7 @@ class GameRules:
         print("-----------------------")
         print("       Game Over       ")
         print("- - - - - - - - - - - -")
-        print(f"Rounds: {turn}")
+        print(f"Turns: {turn}")
         print(f"Score: {score}\n")
         print("-----------------------")
 
@@ -48,15 +47,14 @@ class GameRules:
             self.guess = "lower"
         elif input_lowercase == "h" or input_lowercase == "higher":
             self.guess = "higher"
-        elif input_lowercase == "s" or input_lowercase == "same":
-            self.guess = "same"
         else:
             self.guess = None
         print()
-        
-    def print_score(self, score):
-        # Print the current score.
-        print(f"Your current score is: {score}")
-
-    def end_of_round(self):
-        print("- - - - - - - - - - - -")
+    
+    def add_score(self, score):
+        score += 100
+        print("+100 points")
+    
+    def subtract_score(self, score):
+        score -= 75
+        print("-75 points")
