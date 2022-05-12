@@ -3,11 +3,6 @@
 from game.playing_cards import DeckofCards
 from game.hilo_game import GameRules
 
-# TODO: 
-# 1) Compare card value with user input
-# 2) Make score update if player guesses correctly or incorrectly.
-# 3) Any other fun additions to the game.
-
 class Director: # This runs '__init__(self)' the moment it is called.
     """ The person who directs the game. Controls the sequence of play.
 
@@ -79,7 +74,7 @@ class Director: # This runs '__init__(self)' the moment it is called.
             self (Director): an instance of Director.
         """
         while self.is_playing:
-            # Run the '.everything()' method at the bottom of the file's code.
+            # Run the '.everything()' method located below.
             # Will loop until 'self.is_playing' == False.
             if self.is_playing == True:
                 self.everything()
@@ -98,6 +93,7 @@ class Director: # This runs '__init__(self)' the moment it is called.
                     (e) Compare the last card with the next card. Update the user's score based on their guess.
                     (f) Begin the next round, repeat the loop.
                 (4) Display the final score.
+                (5) Ask the user if they want to keep playing.
 
             Objects:
                 self.hilo  | see 'hilo_game.py' file
@@ -175,8 +171,23 @@ class Director: # This runs '__init__(self)' the moment it is called.
             print(f"Turn: {self.turn}    Score: {self.score}")
             print("- - - - - - - - - - - -\n")
         
-        # When loop_game = False:
+        # (4) When loop_game = False:
         self.hilo.print_game_over(self.turn, self.score)
-        self.is_playing = False
+
+        # (5) Ask the user if they want to continue playing.
+        keep_playing = input("Keep playing? [y/n] ")
+        
+        if keep_playing.lower() == "y" or keep_playing.lower() == "yes":
+            # If "yes", reset the turns and score.
+            self.turn = 1
+            self.score = 300
+            # Combine the used cards back into the deck. Shuffle the deck.
+            self.cards.merge_discarded(self.discard, self.deck)
+            self.cards.shuffle_deck(self.deck)
+
+        elif keep_playing.lower() == "n" or keep_playing.lower() == "no":
+            # If "no", exit program.
+            print("Exiting...")
+            self.is_playing = False
             
             
