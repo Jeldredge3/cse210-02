@@ -43,6 +43,7 @@ class DeckofCards:
                 value = RANK_INDEX + 1
                 name = f"{rank} of {suit}"
                 shortcut = card_suits_abbr[SUIT_INDEX] + str(value)
+                value_and_suit = f"{value} of {suit}"
                 # Create a unique card object which will hold the cards name, suit, and value.
                 card_obj = CardObject()
                 card_obj.suit = suit
@@ -50,6 +51,7 @@ class DeckofCards:
                 card_obj.value = value
                 card_obj.name = name
                 card_obj.shortcut = shortcut
+                card_obj.value_and_suit = value_and_suit
                 # Append the unique card object to the Deck list.
                 deck.append(card_obj)
 
@@ -124,9 +126,9 @@ class DeckofCards:
         if len(deck) > 0:
             top_card = deck.pop(0)
             # TEST: print(f"You draw a '{top_card.name}' ({top_card.value}).")
-            hand.append(top_card)
+            hand.insert(0, top_card)
         else:
-            print("No cards left in the deck to draw from.")
+            print("ERROR: No cards left in the deck to draw from.")
 
     def discard_hand(self, hand, discard): # HAND -> DISCARD
         # Discard all cards from your hand list, move the cards into the discard list.
@@ -135,7 +137,7 @@ class DeckofCards:
                 discarded_card = hand.pop(0)
                 discard.insert(0, discarded_card)
         else:
-            print("No cards in the hand to discard.")
+            print("ERROR: No cards in the hand to discard.")
     
     def discard_card(self, hand, discard): # HAND -> DISCARD
         # Discard the first card from your hand list, move the card into the discard list.
@@ -143,16 +145,18 @@ class DeckofCards:
             discarded_card = hand.pop(0)
             discard.insert(0, discarded_card)
         else:
-            print("No cards in the hand to discard.")
+            print("ERROR: No cards in the hand to discard.")
 
     def merge_discarded(self, discard, deck): # DISCARD -> DECK
         # Combine cards in the discard list back into the deck list.
         if len(discard) > 0:
             for card in discard:
-                returned_card = discard.pop(card)
-                deck.append(returned_card)
+                returned_card = discard.pop(0)
+                deck.insert(0, returned_card)
+            print("-----------------------")
+            print("UPDATE: Moving discarded cards back into the deck.\n")
         else:
-            print("No cards in the discard pile to merge into the deck.")
+            print("ERROR: No cards in the discard pile to merge into the deck.\n")
 
 class CardObject():
     """ Creates a unique card object and stores each attribute within the object.
@@ -171,6 +175,7 @@ class CardObject():
         self.value = ""
         self.name = ""
         self.shortcut = ""
+        self.value_and_suit = ""
 
     def print_attributes(self):
         # Call this method to print out the object's attributes.
