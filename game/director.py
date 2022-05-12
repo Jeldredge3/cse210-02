@@ -171,12 +171,12 @@ class Director: # This runs '__init__(self)' the moment it is called.
             print(f"Turn: {self.turn}    Score: {self.score}")
             print("- - - - - - - - - - - -\n")
         
-        # (4) When loop_game = False:
+        # (4) When loop_game = False
         self.hilo.print_game_over(self.turn, self.score)
 
         # (5) Ask the user if they want to continue playing.
         keep_playing = input("Keep playing? [y/n] ")
-        
+
         if keep_playing.lower() == "y" or keep_playing.lower() == "yes":
             # If "yes", reset the turns and score.
             self.turn = 1
