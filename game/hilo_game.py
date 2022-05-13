@@ -47,8 +47,13 @@ class GameRules:
             self.guess = "lower"
         elif input_lowercase == "h" or input_lowercase == "higher":
             self.guess = "higher"
+        elif input_lowercase == "s" or input_lowercase == "same":
+            self.guess = "same"    
         else:
             self.guess = None
+    def add_more_score(self, score):
+        score += 200
+        print("+200")
     
     def add_score(self, score):
         score += 100

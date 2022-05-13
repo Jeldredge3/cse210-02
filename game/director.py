@@ -1,5 +1,6 @@
 """ CSE210 W03 - High/Low """
 
+from genericpath import samefile
 from game.playing_cards import DeckofCards
 from game.hilo_game import GameRules
 
@@ -138,6 +139,8 @@ class Director: # This runs '__init__(self)' the moment it is called.
                 guess_number = old_card_value + 1
             elif guess == "lower":
                 guess_number = old_card_value - 1 
+            elif guess == "same":
+                guess_number = old_card_value 
             else:
                 loop_game = False
                 break
@@ -160,6 +163,9 @@ class Director: # This runs '__init__(self)' the moment it is called.
             elif new_card_value < old_card_value and guess_number < old_card_value:
                 print("You guessed right!")
                 self.score += 100
+            elif new_card_value == old_card_value and guess_number == old_card_value:
+                print("ahoy!!! you guess the same")
+                self.score += 200
             else:
                 print("Your guess was wrong.")
                 self.score -= 75
